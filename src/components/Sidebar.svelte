@@ -1,7 +1,7 @@
 <script>
 	import Chat from "$features/chat/components/Chat.svelte";
 	import NewChat from "$features/chat/components/NewChat.svelte";
-	import UserProfile from "$features/chat/components/UserProfile.svelte";
+	import UserProfile from "./UserProfile.svelte";
 	import { sidebarVisibility, toggleSidebar } from "$stores/sidebar.svelte";
 </script>
 
