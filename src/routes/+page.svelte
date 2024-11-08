@@ -1,9 +1,9 @@
 <script>
 	import ScrollToBottom from "$components/ScrollToBottom.svelte";
-	import Sidebar from "../components/Sidebar.svelte";
-	import SidebarToggleButton from "../components/SidebarToggleButton.svelte";
-	import PromptInput from "../features/ai/components/PromptInput.svelte";
-	import Message from "../features/message/components/Message.svelte";
+	import Sidebar from "$components/Sidebar.svelte";
+	import SidebarToggleButton from "$components/SidebarToggleButton.svelte";
+	import PromptInput from "$features/ai/components/PromptInput.svelte";
+	import Message from "$features/message/components/Message.svelte";
 </script>
 
 <Sidebar />
@@ -12,8 +12,26 @@
 	<div
 		class="overflow-y-auto space-y-4 pt-[4rem] pb-[9rem] min-[985px]:pt-0 sm:space-y-6"
 	>
-		<Message type={"prompt"} />
-		<Message type={"response"} />
+		<Message type={"prompt"}>
+			<p
+				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
+			>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+				quidem labore, numquam nesciunt sapiente impedit dolore pariatur eos
+				explicabo qui quibusdam sint accusamus! Expedita vitae saepe
+				perferendis, provident recusandae veniam.
+			</p>
+		</Message>
+		<Message type={"response"}>
+			<p
+				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
+			>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+				quidem labore, numquam nesciunt sapiente impedit dolore pariatur eos
+				explicabo qui quibusdam sint accusamus! Expedita vitae saepe
+				perferendis, provident recusandae veniam.
+			</p>
+		</Message>
 	</div>
 
 	<ScrollToBottom />
