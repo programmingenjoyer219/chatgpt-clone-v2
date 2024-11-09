@@ -2,14 +2,17 @@
 	import Chat from "$features/chat/components/Chat.svelte";
 	import NewChat from "$features/chat/components/NewChat.svelte";
 	import UserProfile from "./UserProfile.svelte";
-	import { sidebarVisibility, toggleSidebar } from "$stores/sidebar.svelte";
+	import {
+		sidebarVisibilityStore,
+		toggleSidebar,
+	} from "$stores/sidebar.svelte";
 </script>
 
 <!-- sidebar -->
 <div
 	id="sidebar"
 	class="w-[280px] fixed left-0 top-0 h-full z-10 transition-transform duration-200
-	{sidebarVisibility.value ? 'sidebar-visibility' : ''}"
+	{!sidebarVisibilityStore.value ? 'sidebar-visibility' : ''}"
 >
 	<div class="flex flex-col gap-5 p-3 h-full bg-zinc-700 rounded-md">
 		<!-- row-1 -->
