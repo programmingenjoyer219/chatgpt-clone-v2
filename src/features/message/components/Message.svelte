@@ -3,17 +3,17 @@
 	import type { Snippet } from "svelte";
 
 	interface Props {
-		type: "prompt" | "response";
+		createdBy: "user" | "ai";
 		children: Snippet;
 	}
-	let { type, children }: Props = $props();
+	let { createdBy, children }: Props = $props();
 </script>
 
-{#snippet message(type: "prompt" | "response")}
-<div class="p-3 rounded-md {type === 'prompt' ? 'bg-zinc-700': ''}">
+{#snippet message(createdBy: "user" | "ai")}
+<div class="p-3 rounded-md {createdBy === 'user' ? 'bg-zinc-700': ''}">
 	<div class="message-grid">
 		<div class="flex flex-col items-center justify-start">
-			{#if type === "prompt"}
+			{#if createdBy === "user"}
 				<Avatar username="John Doe" />
 			{:else}
 				<i class="ri-openai-fill text-green-600 text-3xl"></i>
@@ -27,7 +27,7 @@
 </div>
 {/snippet}
 
-{@render message(type)}
+{@render message(createdBy)}
 
 <style>
 	.message-grid {

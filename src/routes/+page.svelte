@@ -12,7 +12,7 @@
 	<div
 		class="overflow-y-auto space-y-4 pt-[4rem] pb-[9rem] min-[985px]:pt-0 sm:space-y-6"
 	>
-		<Message type={"prompt"}>
+		<Message createdBy={"user"}>
 			<p
 				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
 			>
@@ -22,7 +22,7 @@
 				perferendis, provident recusandae veniam.
 			</p>
 		</Message>
-		<Message type={"response"}>
+		<Message createdBy={"ai"}>
 			<p
 				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
 			>
