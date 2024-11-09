@@ -14,7 +14,7 @@
 	<div class="message-grid">
 		<div class="flex flex-col items-center justify-start">
 			{#if createdBy === "user"}
-				<Avatar username="John Doe" />
+				<Avatar />
 			{:else}
 				<i class="ri-openai-fill text-green-600 text-3xl"></i>
 			{/if}
