@@ -7,6 +7,8 @@
 	import Sidebar from "$components/Sidebar.svelte";
 	import SidebarToggleButton from "$components/SidebarToggleButton.svelte";
 	import { userStore } from '$stores/user.svelte';
+	import { PUBLIC_CONVEX_URL } from '$env/static/public';
+	import { setupConvex } from 'convex-svelte';
 
 	interface Props {
 		data: LayoutData;
@@ -15,6 +17,7 @@
 
 	let { data, children }: Props = $props();
 	userStore.value = data.session?.user ?? null;
+	setupConvex(PUBLIC_CONVEX_URL);
 </script>
 
 <main class="min-h-[100dvh] bg-zinc-800">

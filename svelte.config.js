@@ -16,6 +16,7 @@ const config = {
 			$features: './src/features',
 			$components: './src/components',
 			$stores: './src/stores',
+			$convex: './src/convex',
 		}
 	}
 };
