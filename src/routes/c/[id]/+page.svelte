@@ -7,37 +7,28 @@
 	import { page } from "$app/stores";
 	import type { Id } from "$convex/_generated/dataModel";
 
-	// const getChatByIdQuery = useQuery(api.chats.getChatById, {
-	// 	chatId: ($page.params?.id as Id<"chats">) ?? "",
-	// });
+	const getChatByIdQuery = useQuery(api.chats.getChatById, {
+		chatId: ($page.params?.id as Id<"chats">) ?? "",
+	});
 
-	// $inspect(getChatByIdQuery.data);
+	let messages = $derived(getChatByIdQuery.data?.messages);
 </script>
 
 <div class="container mx-auto max-w-4xl p-4 min-h-dvh">
 	<div
 		class="overflow-y-auto space-y-4 pt-[4rem] pb-[9rem] min-[985px]:pt-0 sm:space-y-6"
 	>
-		<Message createdBy={"user"}>
-			<p
-				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
-			>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-				quidem labore, numquam nesciunt sapiente impedit dolore pariatur eos
-				explicabo qui quibusdam sint accusamus! Expedita vitae saepe
-				perferendis, provident recusandae veniam.
-			</p>
-		</Message>
-		<Message createdBy={"ai"}>
-			<p
-				class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
-			>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-				quidem labore, numquam nesciunt sapiente impedit dolore pariatur eos
-				explicabo qui quibusdam sint accusamus! Expedita vitae saepe
-				perferendis, provident recusandae veniam.
-			</p>
-		</Message>
+		{#if !getChatByIdQuery.isLoading && !getChatByIdQuery.error && messages}
+			{#each messages as { m_id, role, content, created_at } (m_id)}
+				<Message {role}>
+					<p
+						class="text-xs min-[425px]:text-sm sm:text-base text-zinc-200 leading-relaxed sm:leading-normal"
+					>
+						{content}
+					</p>
+				</Message>
+			{/each}
+		{/if}
 	</div>
 
 	<ScrollToBottom />
