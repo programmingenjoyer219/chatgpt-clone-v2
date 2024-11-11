@@ -7,8 +7,8 @@ export const createChat = mutation({
 		chat_name: v.string(),
 		messages: v.array(
 			v.object({
-				_id: v.string(),
-				created_by: v.string(),
+				m_id: v.string(),
+				role: v.string(),
 				content: v.string(),
 				created_at: v.string(),
 			})
