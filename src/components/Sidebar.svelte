@@ -6,6 +6,13 @@
 		sidebarVisibilityStore,
 		toggleSidebar,
 	} from "$stores/sidebar.svelte";
+	import { useQuery } from "convex-svelte";
+	import { api } from "$convex/_generated/api";
+	import { userStore } from "$stores/user.svelte";
+
+	const getChatsQuery = useQuery(api.chats.getChats, {
+		ownerEmail: userStore.value?.email ?? "",
+	});
 </script>
 
 <!-- sidebar -->
@@ -31,7 +38,11 @@
 		<NewChat />
 		<!-- row-3 -->
 		<div class="flex flex-col space-y-1 h-full overflow-y-auto">
-			<Chat />
+			{#if !getChatsQuery.isLoading && !getChatsQuery.error && getChatsQuery.data.length}
+				{#each getChatsQuery.data as { chat_name, _id }}
+					<Chat chatName={chat_name} chatId={_id} />
+				{/each}
+			{/if}
 		</div>
 	</div>
 </div>

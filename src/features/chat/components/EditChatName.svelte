@@ -1,7 +1,30 @@
 <script lang="ts">
 	import Menu from "$components/Menu.svelte";
+	import type { Id } from "$convex/_generated/dataModel";
+	import { editChatName } from "../db/update";
+
+	interface Props {
+		chatId: Id<"chats">;
+	}
+
+	let { chatId }: Props = $props();
 
 	let openMenu = $state(false);
+	let newChatName = $state("");
+	let formError = $state(false);
+
+	function handleSubmit(event: Event) {
+		event.preventDefault();
+		if (!newChatName.trim()) {
+			formError = true;
+			return;
+		}
+		editChatName(chatId, newChatName.trim());
+		// TODO: toast notification - chat name updated successfully
+		console.log("chat name updated successfully");
+		newChatName = "";
+		openMenu = false;
+	}
 </script>
 
 <button
@@ -14,13 +37,23 @@
 
 {#if openMenu}
 	<Menu bind:visibilityState={openMenu}>
-		<form id="edit-chat-name" class="flex flex-col gap-4">
+		<form
+			onsubmit={handleSubmit}
+			id="edit-chat-name"
+			class="flex flex-col gap-4"
+		>
 			<label
 				for="chat-name"
 				class="text-zinc-200 text-center text-sm sm:text-base"
-				>Edit chat name</label
-			>
+				>Edit chat name
+			</label>
+			{#if formError}
+				<span class="text-red-500 text-center font-medium text-xs sm:text-sm">
+					Please don't leave the field empty
+				</span>
+			{/if}
 			<input
+				bind:value={newChatName}
 				type="text"
 				placeholder="new chat name"
 				id="chat-name"
@@ -29,8 +62,9 @@
 			<button
 				type="submit"
 				class="bg-green-600 hover:bg-green-500 text-zinc-50 p-3 rounded-md cursor-pointer"
-				>Submit</button
 			>
+				Submit
+			</button>
 		</form>
 	</Menu>
 {/if}

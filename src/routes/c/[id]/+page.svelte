@@ -1,7 +1,17 @@
-<script>
+<script lang="ts">
 	import ScrollToBottom from "$components/ScrollToBottom.svelte";
+	import { api } from "$convex/_generated/api";
 	import PromptInput from "$features/ai/components/PromptInput.svelte";
 	import Message from "$features/message/components/Message.svelte";
+	import { useQuery } from "convex-svelte";
+	import { page } from "$app/stores";
+	import type { Id } from "$convex/_generated/dataModel";
+
+	// const getChatByIdQuery = useQuery(api.chats.getChatById, {
+	// 	chatId: ($page.params?.id as Id<"chats">) ?? "",
+	// });
+
+	// $inspect(getChatByIdQuery.data);
 </script>
 
 <div class="container mx-auto max-w-4xl p-4 min-h-dvh">
