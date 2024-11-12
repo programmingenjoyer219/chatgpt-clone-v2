@@ -8,6 +8,7 @@
 	import type { Id } from "$convex/_generated/dataModel";
 	import { marked } from "marked";
 	import { scrollToBottom } from "$lib/scrollToBottom";
+	import toast from "svelte-french-toast";
 
 	const getChatByIdQuery = $derived(
 		useQuery(api.chats.getChatById, {
@@ -24,6 +25,10 @@
 
 	$effect(() => {
 		messages && scrollToBottom(scrollHeight);
+	});
+
+	$effect(() => {
+		queryError && toast("Failed to fetch messages");
 	});
 </script>
 

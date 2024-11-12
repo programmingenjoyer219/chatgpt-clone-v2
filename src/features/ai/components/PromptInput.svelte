@@ -5,6 +5,7 @@
 	import type { Message } from "$features/message/types";
 	import { getResponseToPrompt } from "../utils";
 	import { formatChatHistory } from "$features/chat/utils";
+	import toast from "svelte-french-toast";
 
 	interface Props {
 		chatHistory: Message[] | undefined;
@@ -26,7 +27,15 @@
 			return;
 		}
 		await createMessage(chatId as Id<"chats">, "user", promptCopy);
-		handleResponseToPrompt(promptCopy);
+		toast.promise(
+			handleResponseToPrompt(promptCopy),
+			{
+				loading: "Processing prompt...",
+				success: "ChatGPT has responded",
+				error: "Oops...something went wrong",
+			},
+			{ position: "top-right" }
+		);
 	}
 
 	async function handleResponseToPrompt(prompt: string) {

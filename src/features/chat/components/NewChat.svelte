@@ -2,13 +2,15 @@
 	import { goto } from "$app/navigation";
 	import { userStore } from "$stores/user.svelte";
 	import { createChat } from "../db/create";
+	import toast from "svelte-french-toast";
 
 	async function handleClick() {
 		if (userStore.value?.email) {
 			const chatId = await createChat(userStore.value?.email, "new chat");
 			if (chatId) {
-				// TODO: toast notification - new chat created
-				console.log("new chat created successfully");
+				toast.success("New chat created successfully", {
+					position: "top-right",
+				});
 				goto(`/c/${chatId}`);
 			} else {
 				console.error("no chatId returned");

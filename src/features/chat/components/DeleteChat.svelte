@@ -3,6 +3,7 @@
 	import { deleteChat } from "../db/delete";
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
+	import toast from "svelte-french-toast";
 
 	interface Props {
 		chatId: Id<"chats">;
@@ -15,8 +16,7 @@
 			goto("/");
 		}
 		deleteChat(chatId);
-		// TODO: toast notification - chat deleted successfully
-		console.log("chat deleted successfully");
+		toast.success("Chat deleted successfully", { position: "top-right" });
 	}
 </script>
 

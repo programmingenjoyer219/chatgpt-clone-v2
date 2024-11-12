@@ -2,6 +2,7 @@
 	import Menu from "$components/Menu.svelte";
 	import type { Id } from "$convex/_generated/dataModel";
 	import { editChatName } from "../db/update";
+	import toast from "svelte-french-toast";
 
 	interface Props {
 		chatId: Id<"chats">;
@@ -20,8 +21,7 @@
 			return;
 		}
 		editChatName(chatId, newChatName.trim());
-		// TODO: toast notification - chat name updated successfully
-		console.log("chat name updated successfully");
+		toast.success("Chat name updated successfully", { position: "top-right" });
 		newChatName = "";
 		openMenu = false;
 	}

@@ -13,6 +13,7 @@
 	import { api } from "$convex/_generated/api";
 	import { dbAddUser } from "$features/auth/db";
 	import { convexClientStore } from "$stores/convexClient.svelte";
+	import { Toaster } from "svelte-french-toast";
 
 	interface Props {
 		data: LayoutData;
@@ -44,7 +45,6 @@
 		} else {
 			console.log("user already exists");
 		}
-		console.log(dbGetUserQuery.data);
 	});
 </script>
 
@@ -54,6 +54,7 @@
 
 <main class="min-h-[100dvh] bg-zinc-800">
 	{#if data.session}
+		<Toaster />
 		<Sidebar />
 		<SidebarToggleButton />
 		{@render children()}
