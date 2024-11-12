@@ -11,7 +11,7 @@ export async function createChat(ownerEmail: string, chatName: string) {
 			messages: [],
 		});
 	} else {
-		console.error("convexClient not initialised");
+		console.error("failed to create new chat: convexClient not initialised");
 	}
 
 	return id;

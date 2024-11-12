@@ -8,5 +8,5 @@ export function editChatName(chatId: Id<"chats">, newName: string) {
 				chatId,
 				newName,
 			})
-		: console.error("convexClient not initialised");
+		: console.error("failed to edit chat name: convexClient not initialised");
 }

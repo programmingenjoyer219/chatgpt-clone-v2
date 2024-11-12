@@ -5,5 +5,5 @@ import { convexClientStore } from "$stores/convexClient.svelte";
 export function deleteChat(chatId: Id<"chats">) {
 	convexClientStore.value
 		? convexClientStore.value.mutation(api.chats.deleteChat, { chatId })
-		: console.error("convexClient not initialised");
+		: console.error("failed to delete chat: convexClient not initialised");
 }

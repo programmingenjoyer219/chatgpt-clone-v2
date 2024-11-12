@@ -13,5 +13,5 @@ export async function createMessage(
 				role,
 				content,
 			})
-		: console.error("convexClient not initialised");
+		: console.error("failed to create message: convexClient not initialised");
 }
