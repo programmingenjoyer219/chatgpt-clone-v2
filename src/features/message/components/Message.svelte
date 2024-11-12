@@ -21,7 +21,7 @@
 			{/if}
 		</div>
 		<!-- content -->
-		<div class="flex flex-col items-start">
+		<div class="flex flex-col items-start prose prose-invert max-w-full prose-sm sm:prose-base overflow-x-auto text-zinc-200">
 			{@render children()}
 		</div>
 	</div>

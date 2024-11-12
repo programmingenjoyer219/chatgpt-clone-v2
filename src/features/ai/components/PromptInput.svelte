@@ -2,16 +2,44 @@
 	import { createMessage } from "$features/message/db/create";
 	import { page } from "$app/stores";
 	import type { Id } from "$convex/_generated/dataModel";
+	import type { Message } from "$features/message/types";
+	import { getResponseToPrompt } from "../utils";
+	import { formatChatHistory } from "$features/chat/utils";
+
+	interface Props {
+		chatHistory: Message[] | undefined;
+		chatHistoryIsLoading: boolean;
+		chatHistoryError: Error | undefined;
+	}
+
+	let { chatHistory, chatHistoryIsLoading, chatHistoryError }: Props = $props();
 
 	let prompt = $state("");
+	let chatId = $derived($page.params.id);
+	let timeoutId = $state<number>();
 
 	async function handleSubmit(event: Event) {
 		event.preventDefault();
-		if (!prompt.trim() || !$page.params?.id) {
+		const promptCopy = prompt;
+		prompt = "";
+		if (!promptCopy.trim() || !chatId) {
 			return;
 		}
-		await createMessage($page.params.id as Id<"chats">, "user", prompt);
-		prompt = "";
+		await createMessage(chatId as Id<"chats">, "user", promptCopy);
+		handleResponseToPrompt(promptCopy);
+	}
+
+	async function handleResponseToPrompt(prompt: string) {
+		timeoutId && clearTimeout(timeoutId);
+		if (!chatHistory || chatHistoryIsLoading || chatHistoryError) {
+			timeoutId = setTimeout(() => handleResponseToPrompt(prompt), 500);
+		} else {
+			const response = await getResponseToPrompt(
+				formatChatHistory(chatHistory),
+				prompt
+			);
+			await createMessage(chatId as Id<"chats">, "model", response);
+		}
 	}
 </script>
 
