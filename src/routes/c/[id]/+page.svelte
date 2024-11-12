@@ -9,10 +9,11 @@
 	import { marked } from "marked";
 	import { scrollToBottom } from "$lib/scrollToBottom";
 
-	const getChatByIdQuery = useQuery(api.chats.getChatById, {
-		chatId: ($page.params?.id as Id<"chats">) ?? "",
-	});
-
+	const getChatByIdQuery = $derived(
+		useQuery(api.chats.getChatById, {
+			chatId: ($page.params?.id as Id<"chats">) ?? "",
+		})
+	);
 	let messages = $derived(getChatByIdQuery.data?.messages);
 	let queryIsLoading = $derived(getChatByIdQuery.isLoading);
 	let queryError = $derived(getChatByIdQuery.error);

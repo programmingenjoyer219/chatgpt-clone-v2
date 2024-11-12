@@ -2,6 +2,7 @@
 	import DeleteChat from "./DeleteChat.svelte";
 	import EditChatName from "./EditChatName.svelte";
 	import type { Id } from "$convex/_generated/dataModel";
+	import { goto } from "$app/navigation";
 
 	interface Props {
 		chatName: string;
@@ -14,10 +15,7 @@
 <!-- chat -->
 <div class="flex items-center p-2 bg-zinc-800 rounded-md">
 	<div class="flex-1 flex items-center">
-		<button
-			onclick={() => (location.href = `/c/${chatId}`)}
-			class="flex-1 text-start"
-		>
+		<button onclick={() => goto(`/c/${chatId}`)} class="flex-1 text-start">
 			<span class="text-gray-50 text-sm sm:text-base">{chatName}</span>
 		</button>
 	</div>
